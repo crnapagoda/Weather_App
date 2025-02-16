@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vremenska prognoza</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar" id="sidebar" class="collapsed">
+            <h2><i class="fa-solid fa-cloud-sun"></i> Vreme</h2>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fa-solid fa-city"></i><span class="sidebar-text">Gradovi</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-map"></i><span class="sidebar-text">Mapa</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-gear"></i><span class="sidebar-text">Podešavanja</span></a></li>
+                </ul>
+            </nav>
+            <button id="toggleSidebar"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="main">
+            <div class="search-container">
+                <input type="text" id="cityInput" placeholder="Unesite grad">
+                <button onclick="fetchWeather()"><i class="fa-solid fa-magnifying-glass"></i> Pretraga</button>
+            </div>
+
+            <div class="current-weather-card" id="weatherResult">
+                <div class="current-weather">
+                    <h2 id="cityName"></h2>
+                    <div class="weather-main">
+                        <i id="weatherIcon" class="fa-solid fa-sun"></i>
+                        <div>
+                            <p id="temperature"></p>
+                            <p id="description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="today-week-card">
+                <h3>Danas / Nedelja</h3>
+                <div id="forecast" class="forecast-container"></div>
+                <canvas id="rainChart"></canvas>
+            </div>
+
+            <div class="other-cities-card">
+                <h3>Ostali gradovi</h3>
+                <div id="otherCities"></div>
+            </div>
+
+            <div class="today-highlight-card">
+                <h3>Danas u fokusu</h3>
+                <div class="highlight-details">
+                    <div class="detail-item">
+                        <i class="fa-solid fa-umbrella"></i>
+                        <p id="rainChance"></p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-wind"></i>
+                        <p id="wind"></p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-water"></i>
+                        <p id="humidity"></p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-sun"></i>
+                        <p id="uvIndex"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
