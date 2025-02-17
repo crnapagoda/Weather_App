@@ -1,9 +1,9 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1e1e2e;
-    color: white;
     margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Promenjen font */
+    background: url('bg1.jpg') no-repeat center center fixed; /* Pozadinska slika */
+    background-size: cover; /* Pokrijte celu pozadinu */
+    color: #ffffff; /* Osnovna boja fonta */
 }
 
 .app-container {
@@ -12,59 +12,78 @@ body {
 }
 
 .sidebar {
-    width: 250px;
-    background: #2c2c3e;
-    padding: 30px 20px;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    width: 60px; /* Početna širina */
+    height: 100vh; /* Visina sidebar-a */
+    background: rgba(255, 255, 255, 0.15); /* Glassmorphism efekat */
+    backdrop-filter: blur(12px) saturate(180%); /* Blur efekat */
+    -webkit-backdrop-filter: blur(12px) saturate(180%); /* Safari podrška */
+    border-radius: 10px; /* Zaobljene ivice */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Granica */
+    position: fixed; /* Fiksna pozicija */
+    top: 0;
+    left: 0;
+    overflow: hidden;
     transition: width 0.3s ease;
+    z-index: 1000; /* Osigurajte da je sidebar iznad ostalih elemenata */
 }
 
-.sidebar h2 {
-    color: #fff;
-    font-size: 1.5rem;
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.sidebar:hover {
+    width: 200px; /* Širina kada se hoveruje */
 }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .sidebar ul li {
-    padding: 15px 0;
-    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: white; /* Boja fonta u sidebar-u */
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .sidebar ul li:hover {
-    background: #3a3a4e;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.25); /* Light hover efekat */
 }
 
-.sidebar ul li a {
-    text-decoration: none;
-    color: #bbb;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 15px;
-    font-size: 1.05rem;
+.sidebar ul li i {
+    font-size: 24px;
+    width: 30px;
+    text-align: center;
+}
+
+.sidebar ul li span {
+    margin-left: 10px;
+    white-space: nowrap;
+    opacity: 0; /* Sakrijte tekst */
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover ul li span {
+    opacity: 1; /* Prikazivanje teksta kada se hoveruje */
 }
 
 #toggleSidebar {
-    background: none;
-    border: none;
-    color: #bbb;
-    cursor: pointer;
-    font-size: 1.5rem;
+    display: none;
 }
 
 .main {
-    flex-grow: 1;
+    flex-grow: 1; /* Ovaj deo zauzima preostalu širinu */
     padding: 30px;
-    background: #252536;
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism efekat */
+    backdrop-filter: blur(10px); /* Blur efekat */
+    border-radius: 10px; /* Zaobljene ivice */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Granica */
+    margin-left: 60px; /* Razmak sa leve strane da ne preklapa sidebar */
+    transition: margin-left 0.3s ease; /* Glatka animacija */
+}
+
+.sidebar:hover + .main {
+    margin-left: 200px; /* Povećajte razmak kada se sidebar proširi */
 }
 
 .search-container {
@@ -78,8 +97,9 @@ input {
     width: 300px;
     border: none;
     border-radius: 8px;
-    background: #3a3a4e;
-    color: white;
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism efekat */
+    backdrop-filter: blur(8px); /* Blur efekat */
+    color: white; /* Boja fonta u inputu */
     font-size: 1rem;
 }
 
@@ -87,8 +107,9 @@ button {
     padding: 12px 25px;
     border: none;
     border-radius: 8px;
-    background: #646cff;
-    color: white;
+    background: rgba(100, 108, 255, 0.8); /* Glassmorphism efekat */
+    backdrop-filter: blur(8px); /* Blur efekat */
+    color: white; /* Boja fonta u dugmetu */
     cursor: pointer;
     transition: 0.3s;
     display: flex;
@@ -98,15 +119,16 @@ button {
 }
 
 button:hover {
-    background: #535bf2;
+    background: rgba(83, 91, 242, 0.9);
     transform: translateY(-2px);
 }
 
 #weatherResult {
-    background: #2c2c3e;
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism efekat */
+    backdrop-filter: blur(10px); /* Blur efekat */
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .weather-main {
@@ -118,7 +140,7 @@ button:hover {
 
 #weatherIcon {
     font-size: 5rem;
-    color: #ffd700;
+    color: #ffd700; /* Boja ikone vremena */
 }
 
 #temperature {
@@ -129,7 +151,7 @@ button:hover {
 
 #description {
     font-size: 1.4rem;
-    color: #bbb;
+    color: #bbb; /* Boja opisa vremena */
     text-transform: capitalize;
 }
 
@@ -141,12 +163,14 @@ button:hover {
 }
 
 .detail-item {
-    background: #3a3a4e;
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism efekat */
+    backdrop-filter: blur(15px); /* Povećan blur efekat */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Granica */
     padding: 20px;
     border-radius: 12px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     transition: transform 0.3s;
 }
 
@@ -155,8 +179,8 @@ button:hover {
 }
 
 .detail-item i {
-    font-size: 1.8rem;
-    color: #646cff;
+    font-size: 1.5rem;
+    color: #646cff; /* Boja ikone u detaljima */
 }
 
 .forecast-container {
@@ -166,7 +190,9 @@ button:hover {
 }
 
 .forecast-item {
-    background: #3a3a4e;
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism efekat */
+    backdrop-filter: blur(15px); /* Povećan blur efekat */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Granica */
     padding: 20px;
     border-radius: 12px;
     flex: 1;
@@ -183,28 +209,22 @@ button:hover {
     margin-bottom: 10px;
 }
 
-.current-weather-card, .today-week-card, .other-cities-card, .today-highlight-card {
-    background: #2c2c3e;
-    padding: 20px;
+.current-weather-card,
+.today-week-card,
+.other-cities-card,
+.today-highlight-card {
+    background: rgba(255, 255, 255, 0.2); /* Glassmorphism efekat */
+    backdrop-filter: blur(15px); /* Povećan blur efekat */
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Granica */
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }
 
 .highlight-details {
     display: flex;
     gap: 20px;
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.detail-item i {
-    font-size: 1.5rem;
-    color: #646cff;
 }
 
 @media (max-width: 768px) {
@@ -250,11 +270,7 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-    .sidebar h2 {
-        font-size: 1.2rem;
-    }
-
-    .sidebar ul li a {
+    .sidebar ul li span {
         font-size: 0.9rem;
     }
 
@@ -271,6 +287,27 @@ button:hover {
     display: none;
 }
 
-.sidebar.collapsed h2 {
-    justify-content: center;
+.sidebar:hover {
+    width: 200px;
+}
+
+.sidebar:hover h2 {
+    display: flex;
+}
+
+.sidebar:hover .sidebar-text {
+    display: inline;
+}
+
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+canvas {
+    flex: 1;
+    max-width: 100%;
+    height: 400px;
+    margin: 0 10px;
 }

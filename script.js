@@ -1,6 +1,6 @@
 const apiKey = '';
 
-let rainChart; 
+let tempChart;
 
 async function fetchWeather() {
     const city = document.getElementById('cityInput').value;
@@ -32,35 +32,6 @@ async function fetchWeather() {
         document.getElementById('rainChance').innerText = `${data.rain ? data.rain['1h'] + '%' : '0%'}`;
         document.getElementById('uvIndex').innerText = `${data.uvi} UV`;
         document.getElementById('humidity').innerText = `${data.main.humidity}%`;
-
-        // Inicijalizacija grafika
-        const ctx = document.getElementById('rainChart').getContext('2d');
-
-        // Uništavanje prethodnog grafika ako postoji
-        if (rainChart) {
-            rainChart.destroy();
-        }
-
-        rainChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['1h', '2h', '3h', '4h', '5h'],
-                datasets: [{
-                    label: 'Verovatnoća kiše',
-                    data: [/* podaci o kiši */],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
 
         fetchForecast(city);
     } catch (error) {
@@ -102,17 +73,19 @@ async function fetchForecast(city) {
         const forecastElement = document.getElementById('forecast');
         forecastElement.innerHTML = '';
 
-        const rainData = []; // Niz za prikupljanje podataka o kiši
+        const tempData = []; // Ostavite samo niz za temperaturu
+        const labels = []; // Niz za oznake
 
         for (let i = 0; i < 5; i++) {
-            const item = data.list[i * 8];
+            const item = data.list[i * 8]; // Uzimamo podatke na svakih 8 sati
             const day = new Date(item.dt_txt).toLocaleDateString('sr-RS', { 
                 weekday: 'long',
                 month: 'short', 
                 day: 'numeric' 
             });
 
-            rainData.push(item.rain ? item.rain['1h'] || 0 : 0); // Dodajte podatke o kiši
+            labels.push(day); // Dodajte dan u oznake
+            tempData.push(Math.round(item.main.temp)); // Dodajte podatke o temperaturi
 
             const div = document.createElement('div');
             div.classList.add('forecast-item');
@@ -126,29 +99,42 @@ async function fetchForecast(city) {
         }
 
         // Inicijalizacija grafika
-        const ctx = document.getElementById('rainChart').getContext('2d');
+        const ctxTemp = document.getElementById('tempChart').getContext('2d');
 
         // Uništavanje prethodnog grafika ako postoji
-        if (rainChart) {
-            rainChart.destroy();
+        if (tempChart) {
+            tempChart.destroy();
         }
 
-        rainChart = new Chart(ctx, {
-            type: 'bar',
+        // Graf za temperaturu
+        tempChart = new Chart(ctxTemp, {
+            type: 'line',
             data: {
-                labels: ['1h', '2h', '3h', '4h', '5h'],
+                labels: labels,
                 datasets: [{
-                    label: 'Verovatnoća kiše',
-                    data: rainData, // Koristite prikupljene podatke o kiši
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
+                    label: 'Temperatura (°C)',
+                    data: tempData,
+                    fill: false,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    tension: 0.1,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
                 }]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Temperatura (°C)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Dan'
+                        }
                     }
                 }
             }

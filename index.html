@@ -10,16 +10,14 @@
 </head>
 <body>
     <div class="app-container">
-        <div class="sidebar" id="sidebar" class="collapsed">
-            <h2><i class="fa-solid fa-cloud-sun"></i> Vreme</h2>
+        <div class="sidebar" id="sidebar">
             <nav>
                 <ul>
-                    <li><a href="#"><i class="fa-solid fa-city"></i><span class="sidebar-text">Gradovi</span></a></li>
-                    <li><a href="#"><i class="fa-solid fa-map"></i><span class="sidebar-text">Mapa</span></a></li>
-                    <li><a href="#"><i class="fa-solid fa-gear"></i><span class="sidebar-text">Podešavanja</span></a></li>
+                    <li><i class="fa-solid fa-city"></i><span class="sidebar-text">Gradovi</span></li>
+                    <li><i class="fa-solid fa-map"></i><span class="sidebar-text">Mapa</span></li>
+                    <li><i class="fa-solid fa-gear"></i><span class="sidebar-text">Podešavanja</span></li>
                 </ul>
             </nav>
-            <button id="toggleSidebar"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="main">
             <div class="search-container">
@@ -43,7 +41,9 @@
             <div class="today-week-card">
                 <h3>Danas / Nedelja</h3>
                 <div id="forecast" class="forecast-container"></div>
-                <canvas id="rainChart"></canvas>
+                <div class="charts-container">
+                    <canvas id="tempChart"></canvas>
+                </div>
             </div>
 
             <div class="other-cities-card">
