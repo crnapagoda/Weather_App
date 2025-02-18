@@ -10,67 +10,53 @@
 </head>
 <body>
     <div class="app-container">
-        <div class="sidebar" id="sidebar">
-            <nav>
-                <ul>
-                    <li><i class="fa-solid fa-city"></i><span class="sidebar-text">Gradovi</span></li>
-                    <li><i class="fa-solid fa-map"></i><span class="sidebar-text">Mapa</span></li>
-                    <li><i class="fa-solid fa-gear"></i><span class="sidebar-text">Podešavanja</span></li>
-                </ul>
-            </nav>
-        </div>
         <div class="main">
-            <div class="search-container">
-                <input type="text" id="cityInput" placeholder="Unesite grad">
-                <button onclick="fetchWeather()"><i class="fa-solid fa-magnifying-glass"></i> Pretraga</button>
-            </div>
+            <div class="main-content">
+                <div class="search-container">
+                    <input type="text" id="cityInput" placeholder="Unesite grad">
+                    <button onclick="fetchWeather()"><i class="fa-solid fa-magnifying-glass"></i> Pretraga</button>
+                </div>
 
-            <div class="current-weather-card" id="weatherResult">
-                <div class="current-weather">
-                    <h2 id="cityName"></h2>
-                    <div class="weather-main">
-                        <i id="weatherIcon" class="fa-solid fa-sun"></i>
-                        <div>
-                            <p id="temperature"></p>
-                            <p id="description"></p>
+                <div class="current-weather-card" id="weatherResult">
+                    <div class="current-weather">
+                        <h2 id="cityName"></h2>
+                        <div class="weather-main">
+                            <i id="weatherIcon" class="fa-solid fa-sun"></i>
+                            <div>
+                                <p id="temperature"></p>
+                                <p id="description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="today-week-card">
+                    <h3>Danas / Nedelja</h3>
+                    <div id="forecast" class="forecast-container"></div>
+                </div>
+
+                <div class="today-highlight-card">
+                    <h3>Danas u fokusu</h3>
+                    <div class="highlight-details">
+                        <div class="detail-item">
+                            <i class="fa-solid fa-umbrella"></i>
+                            <p id="rainChance"></p>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-wind"></i>
+                            <p id="wind"></p>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-water"></i>
+                            <p id="humidity"></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="today-week-card">
-                <h3>Danas / Nedelja</h3>
-                <div id="forecast" class="forecast-container"></div>
-                <div class="charts-container">
-                    <canvas id="tempChart"></canvas>
-                </div>
-            </div>
-
-            <div class="other-cities-card">
-                <h3>Ostali gradovi</h3>
-                <div id="otherCities"></div>
-            </div>
-
-            <div class="today-highlight-card">
-                <h3>Danas u fokusu</h3>
-                <div class="highlight-details">
-                    <div class="detail-item">
-                        <i class="fa-solid fa-umbrella"></i>
-                        <p id="rainChance"></p>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fa-solid fa-wind"></i>
-                        <p id="wind"></p>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fa-solid fa-water"></i>
-                        <p id="humidity"></p>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fa-solid fa-sun"></i>
-                        <p id="uvIndex"></p>
-                    </div>
-                </div>
+            <div class="history-card">
+                <h3>Istorija gradova</h3>
+                <div id="history"></div>
             </div>
         </div>
     </div>
